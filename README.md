@@ -1,7 +1,7 @@
 # Inspect In Index #
 A quick and easy way to inspect EPiServer content in the EPiServer Find index, without having to use the EPiServer Find Explore view.
 
-When installed, you may select a new view called Inspect In Index. This will show the current content's raw form in the EPiServer Find Index, with the options to index, re-index or delete the content on the fly.
+When installed, you may select a new view called Inspect In Index. This will show the current content's raw form in the EPiServer Find Index, with the options to index, re-index or delete content from the index.
 
 ![](https://raw.githubusercontent.com/BVNetwork/InspectInIndex/master/doc/img/iii.png)
 
@@ -18,6 +18,6 @@ By default, only users with the Administrators role will have access to the view
 
 ``` 
 <add key="EPiCode.InspectInIndex.AllowedRoles"
-     value="developers,administrators,searchfanatics" />
+     value="developers,Administrators,searchfanatics" />
 ```
 
