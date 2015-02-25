@@ -6,7 +6,7 @@
     <title>EPiCode.InspectInIndex</title>
     <authors>Per Magne Skuseth</authors>
     <owners>BV Network AS</owners>
-    <projectUrl>https://github.com/bvnetwork</projectUrl>
+    <projectUrl>https://github.com/BVNetwork/InspectInIndex</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Extremly useful thingy when working with EPiServer Find</description>
     <releaseNotes></releaseNotes>

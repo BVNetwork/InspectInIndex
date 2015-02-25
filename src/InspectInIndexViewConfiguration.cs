@@ -15,11 +15,11 @@ namespace EPiCode.InspectInIndex
             string roles = ConfigurationManager.AppSettings["EPiCode.InspectInIndex.AllowedRoles"];
             if (string.IsNullOrEmpty(roles))
             {
-                roles = "Administrators";
+                roles = "CmsAdmins,SearchAdmins";
             }
             foreach (var role in roles.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                if (!PrincipalInfo.CurrentPrincipal.IsInRole(role))
+                if (!PrincipalInfo.CurrentPrincipal.IsInRole(role.Trim()))
                 {
                     HideFromViewMenu = true;
                 }
