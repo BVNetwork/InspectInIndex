@@ -17,15 +17,18 @@ namespace EPiCode.InspectInIndex
             {
                 roles = "Administrators";
             }
-
             foreach (var role in roles.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
                 if (!PrincipalInfo.CurrentPrincipal.IsInRole(role))
                 {
                     HideFromViewMenu = true;
                 }
-            }
-            
+                else
+                {
+                    HideFromViewMenu = false;
+                    break;
+                }
+            }       
             Key = "InspectInIndex";
             Name = "Inspect in index";
             Description = "Show content in Find index";
