@@ -183,7 +183,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="EPiCode.InspectInIndex.nuspec" />
     <None Include="msbuild\Main.proj" />
     <None Include="module.config">
