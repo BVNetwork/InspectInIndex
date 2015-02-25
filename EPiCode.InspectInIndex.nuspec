@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>EPiCode.InspectInIndex</id>
+    <version>$version$</version>
+    <title>EPiCode.InspectInIndex</title>
+    <authors>Per Magne Skuseth</authors>
+    <owners>BV Network AS</owners>
+    <projectUrl>https://github.com/bvnetwork</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Extremly useful thingy when working with EPiServer Find</description>
+    <releaseNotes></releaseNotes>
+    <copyright></copyright>
+    <tags>EPiServer Find</tags>
+    <dependencies>
+      <dependency id="EPiServer.Framework" version="7.13" />
+      <dependency id="EPiServer.CMS.Core" version="7.13" />
+      <dependency id="EPiServer.Find.Cms" version="8.8.0.1354"  />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\$configuration$\EPiCode.InspectInIndex.dll" target="lib\net45\" />
+    <file src="bin\$configuration$\EPiCode.InspectInIndex.zip" target="content\modules\_protected\EPiCode.InspectInIndex\" />
+  </files>
+</package>

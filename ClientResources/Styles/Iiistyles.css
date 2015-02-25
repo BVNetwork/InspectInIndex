@@ -1,0 +1,35 @@
+﻿.iii-inspectindexview {
+    height: 100%;
+}
+
+.iii-ButtonRow {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.iii-findcontentView {
+    width: 100%;
+    height: 80%;
+    overflow: visible;
+}
+
+.iii-icon {
+    background: url("../img/iiiicon.png") rgba(0, 0, 0, 0);
+    height: 24px;
+    width: 24px;
+}
+
+.iii-findcontentView pre {
+    margin: 40px;
+    margin-top: 10px;
+    word-break: break-word;
+    font: 1em 'andale mono','lucida console',monospace;
+    line-height: 1.5;
+    background-color: #efefef;
+    border: 1px solid #ccc;
+    overflow: scroll;
+    height: 100%;
+    overflow-x: hidden;
+}
