@@ -14,10 +14,10 @@ You need to add the EPiServer NuGet Feed to Visual Studio (see http://nuget.epis
 
 ## Configuration ##
 
-By default, only users with the Administrators role will have access to the view. You may override this by adding the following to appSettings in web.config:
+By default, only users with the "CmsAdmins" or "SearchAdmins" role will have access to the view. You may override this by adding the following to appSettings in web.config:
 
 ``` 
 <add key="EPiCode.InspectInIndex.AllowedRoles"
-     value="developers,Administrators,searchfanatics" />
+     value="developers,searchfanatics,Administrators,CmsAdmins" />
 ```
 
