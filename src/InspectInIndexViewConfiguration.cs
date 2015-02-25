@@ -12,7 +12,7 @@ namespace EPiCode.InspectInIndex
     {
         public InspectInIndexViewConfiguration()
         {
-            string roles = ConfigurationManager.AppSettings["InspectInIndexRoles"];
+            string roles = ConfigurationManager.AppSettings["EPiCode.InspectInIndex.AllowedRoles"];
             if (string.IsNullOrEmpty(roles))
             {
                 roles = "Administrators";
