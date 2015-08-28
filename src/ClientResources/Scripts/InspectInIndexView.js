@@ -55,7 +55,6 @@ function (
                     viewName: data.viewName
                 }
             });
-            console.log(this);
             var that = this;
 
             dojo.when(that.store.get(context.id), function (indexId) {
@@ -64,6 +63,7 @@ function (
             Button({
                 label: "Delete",
                 disabled: true,
+                class: "epi-danger",
                 iconClass: "epi-iconTrash",
                 onClick: function () {
                     dojo.when(that.store.remove(that.id), function () {
