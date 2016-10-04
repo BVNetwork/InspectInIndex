@@ -18,7 +18,6 @@ namespace EPiCode.InspectInIndex
 
         public InspectInIndexStore(IContentLoader contentLoader, IPathHelper pathHelper, IFindUIConfiguration findUiConfiguration)
         {
-            ContentIndexer.Instance.Invisible = false;
             _contentLoader = contentLoader;
             _pathHelper = pathHelper;
             _findUiConfiguration = findUiConfiguration;
