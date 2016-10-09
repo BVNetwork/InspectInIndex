@@ -64,7 +64,7 @@ function (
                 label: "Delete",
                 disabled: true,
                 class: "epi-danger",
-                iconClass: "epi-iconTrash",
+                iconClass: "epi-iconTrash epi-icon--inverted",
                 onClick: function () {
                     dojo.when(that.store.remove(that.id), function () {
                         that.findresult.innerHTML = 'Deleted from index.';
@@ -78,7 +78,8 @@ function (
             Button({
                 label: "Index",
                 disabled: true,
-                iconClass: "epi-iconReload",
+                class: "epi-primary",
+                iconClass: "epi-iconReload epi-icon--inverted",
                 onClick: function () {
                     that.findresult.innerHTML = "Loading...";
                     dojo.when(that.store.put({
