@@ -8,14 +8,15 @@
     <owners>BV Network AS</owners>
     <projectUrl>https://github.com/BVNetwork/InspectInIndex</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Extremly useful thingy when working with EPiServer Find</description>
+    <description>Adds an extra view in edit mode which let you view the current content in the Find index</description>
     <releaseNotes></releaseNotes>
     <copyright></copyright>
     <tags>EPiServer Find</tags>
     <dependencies>
-      <dependency id="EPiServer.Framework" version="7.13" />
-      <dependency id="EPiServer.CMS.Core" version="7.13" />
-      <dependency id="EPiServer.Find.Cms" version="8.8.0.1354"  />
+      <dependency id="EPiServer.Framework" version="10.1.0" />
+      <dependency id="EPiServer.CMS.Core" version="10.1.0" />
+      <dependency id="EPiServer.Find.Cms" version="12.2.5"  />
+      <dependency id="EPiServer.CMS.UI.Core" version="10.1.1"  />
     </dependencies>
   </metadata>
   <files>
