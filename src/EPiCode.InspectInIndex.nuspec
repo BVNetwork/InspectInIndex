@@ -13,10 +13,10 @@
     <copyright></copyright>
     <tags>EPiServer Find</tags>
     <dependencies>
-      <dependency id="EPiServer.Framework" version="10.1.0" />
-      <dependency id="EPiServer.CMS.Core" version="10.1.0" />
-      <dependency id="EPiServer.Find.Cms" version="12.2.5"  />
-      <dependency id="EPiServer.CMS.UI.Core" version="10.1.1"  />
+      <dependency id="EPiServer.Framework" version="[11.1.0, 12.0)" />
+      <dependency id="EPiServer.CMS.Core" version="[11.1.0, 12.0)" />
+      <dependency id="EPiServer.CMS.UI.Core" version="[11.1.0, 12.0)"  />
+      <dependency id="EPiServer.Find.Cms" version="12.7.0"  />
     </dependencies>
   </metadata>
   <files>
