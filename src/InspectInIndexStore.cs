@@ -15,17 +15,19 @@ namespace EPiCode.InspectInIndex
         private readonly IContentLoader _contentLoader;
         private readonly IPathHelper _pathHelper;
         private readonly IFindUIConfiguration _findUiConfiguration;
+        private readonly LanguageRoutingFactory _languageRoutingFactory;
 
-        public InspectInIndexStore(IContentLoader contentLoader, IPathHelper pathHelper, IFindUIConfiguration findUiConfiguration)
+        public InspectInIndexStore(IContentLoader contentLoader, IPathHelper pathHelper, IFindUIConfiguration findUiConfiguration, LanguageRoutingFactory languageRoutingFactory)
         {
             _contentLoader = contentLoader;
             _pathHelper = pathHelper;
             _findUiConfiguration = findUiConfiguration;
+            _languageRoutingFactory = languageRoutingFactory;
         }
 
         [HttpGet]
         public ActionResult Get(ContentReference id)
-        {           
+        {
             var content = _contentLoader.Get<IContent>(id);
             var rest = Rest(new { path = GetIndexContentPath(content) });
             return rest;
@@ -41,7 +43,7 @@ namespace EPiCode.InspectInIndex
         }
 
         public ActionResult Delete(ContentReference id)
-        {   
+        {
             var content = _contentLoader.Get<IContent>(id);
             SearchClient.Instance.Delete(content.GetOriginalType(), content.GetIndexId(), null);
             return null;
@@ -50,7 +52,7 @@ namespace EPiCode.InspectInIndex
         private string GetIndexContentPath(IContent content)
         {
             string findProxyPath = _pathHelper.EnsureTrailingSlash(_pathHelper.GetPathInModule(_findUiConfiguration.AdminProxyPath));
-            return findProxyPath + GetTypeAndIndexId(content);
+            return findProxyPath + GetTypeAndIndexId(content) + GetLanguageRoutingParameter(content);
         }
 
         private string GetTypeAndIndexId(IContent content)
@@ -58,6 +60,17 @@ namespace EPiCode.InspectInIndex
             var type = content.GetOriginalType().FullName.Replace('.', '_');
             var indexId = content.GetIndexId();
             return type + '/' + indexId;
+        }
+
+        private string GetLanguageRoutingParameter(IContent content)
+        {
+            var locale = content as ILocale;
+            if (locale == null)
+            {
+                return string.Empty;
+            }
+            var languageRouting = _languageRoutingFactory.CreateLanguageRouting(locale);
+            return $"?language_routing={languageRouting.FieldSuffix}";
         }
     }
 }
