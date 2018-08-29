@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using EPiServer;
 using EPiServer.Core;
+using EPiServer.Find.Api;
 using EPiServer.Find.Cms;
 using EPiServer.Find.Framework;
 using EPiServer.Find.UI;
@@ -45,7 +46,7 @@ namespace EPiCode.InspectInIndex
         public ActionResult Delete(ContentReference id)
         {
             var content = _contentLoader.Get<IContent>(id);
-            SearchClient.Instance.Delete(content.GetOriginalType(), content.GetIndexId(), null);
+            SearchClient.Instance.Delete(content.GetOriginalType(), content.GetIndexId(), GetLanguageRouting(content), null);
             return null;
         }
 
@@ -64,13 +65,26 @@ namespace EPiCode.InspectInIndex
 
         private string GetLanguageRoutingParameter(IContent content)
         {
+            var  languageRouting = GetLanguageRouting(content);
+
+            if (languageRouting != null)
+            {
+                return $"?language_routing={languageRouting.FieldSuffix}";
+            }
+            
+            return string.Empty;
+        }
+
+        private LanguageRouting GetLanguageRouting(IContent content)
+        {
             var locale = content as ILocale;
+
             if (locale == null)
             {
-                return string.Empty;
+                return null;
             }
-            var languageRouting = _languageRoutingFactory.CreateLanguageRouting(locale);
-            return $"?language_routing={languageRouting.FieldSuffix}";
+
+            return _languageRoutingFactory.CreateLanguageRouting(locale);
         }
     }
 }
