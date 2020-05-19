@@ -22,5 +22,6 @@
   <files>
     <file src="bin\$configuration$\EPiCode.InspectInIndex.dll" target="lib\net45\" />
     <file src="bin\$configuration$\EPiCode.InspectInIndex.zip" target="content\modules\_protected\EPiCode.InspectInIndex\" />
+    <file src="web.config.transform" target="content\web.config.transform" />
   </files>
 </package>
