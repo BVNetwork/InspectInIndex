@@ -3,7 +3,6 @@ using EPiServer;
 using EPiServer.Core;
 using EPiServer.Find.Api;
 using EPiServer.Find.Cms;
-using EPiServer.Find.Framework;
 using EPiServer.Find.UI;
 using EPiServer.Find.UI.Helpers;
 using EPiServer.Shell.Services.Rest;
@@ -14,13 +13,15 @@ namespace EPiCode.InspectInIndex
     public class InspectInIndexStore : RestControllerBase
     {
         private readonly IContentLoader _contentLoader;
+        private readonly IContentIndexer _contentIndexer;
         private readonly IPathHelper _pathHelper;
         private readonly IFindUIConfiguration _findUiConfiguration;
         private readonly LanguageRoutingFactory _languageRoutingFactory;
 
-        public InspectInIndexStore(IContentLoader contentLoader, IPathHelper pathHelper, IFindUIConfiguration findUiConfiguration, LanguageRoutingFactory languageRoutingFactory)
+        public InspectInIndexStore(IContentLoader contentLoader, IContentIndexer contentIndexer, IPathHelper pathHelper, IFindUIConfiguration findUiConfiguration, LanguageRoutingFactory languageRoutingFactory)
         {
             _contentLoader = contentLoader;
+            _contentIndexer = contentIndexer;
             _pathHelper = pathHelper;
             _findUiConfiguration = findUiConfiguration;
             _languageRoutingFactory = languageRoutingFactory;
@@ -38,7 +39,8 @@ namespace EPiCode.InspectInIndex
         public ActionResult Post(ContentReference reference)
         {
             var content = _contentLoader.Get<IContent>(reference);
-            SearchClient.Instance.Index(content, x => x.Refresh = true);
+            _contentIndexer.Index(content);
+
             var rest = Rest(new { path = GetIndexContentPath(content) });
             return rest;
         }
@@ -46,7 +48,8 @@ namespace EPiCode.InspectInIndex
         public ActionResult Delete(ContentReference id)
         {
             var content = _contentLoader.Get<IContent>(id);
-            SearchClient.Instance.Delete(content.GetOriginalType(), content.GetIndexId(), GetLanguageRouting(content), null);
+            _contentIndexer.Delete(content);
+
             return null;
         }
 
