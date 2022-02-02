@@ -83,7 +83,7 @@ function (
                 onClick: function () {
                     that.findresult.innerHTML = "Loading...";
                     dojo.when(that.store.put({
-                        reference: that.id,
+                        "reference": that.id
                     }), function (indexId) {
                         that._populate(indexId);
                     });
