@@ -14,7 +14,7 @@ You need to add the Optimizely NuGet Feed to Visual Studio (see http://nuget.opt
 
 ## Configuration ##
 
-Add the NotFound handler in the Startup.cs in the ConfigureServices method. Below is an example
+Add the Inspect In Index in the Startup.cs in the ConfigureServices method. Below is an example
 
 ``` 
 public void ConfigureServices(IServiceCollection services)
