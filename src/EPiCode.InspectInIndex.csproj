@@ -4,16 +4,17 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">.\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <IsPackable>true</IsPackable>
-    <Version>2.0.0-pre-0004</Version>
-    <PackageVersion>2.0.0-pre-0004</PackageVersion>
+    <Version>2.0.0.0</Version>
+    <PackageVersion>2.0.0</PackageVersion>
   </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="EPiServer.Find.Cms" Version="[14.2.4, 17)" />
-    <PackageReference Include="EPiServer.CMS.UI.Core" Version="[12.4.0, 13)" />
+    <PackageReference Include="EPiServer.Find.Cms" Version="[16.2.0, 17)" />
+    <PackageReference Include="EPiServer.CMS.AspNetCore.Templating" Version="12.21.2" />
+    <PackageReference Include="EPiServer.CMS.UI.Core" Version="[12.29.1, 13)" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="module.config">
