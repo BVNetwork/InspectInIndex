@@ -1,11 +1,13 @@
-﻿using System.Web.Mvc;
-using EPiServer;
+﻿using EPiServer;
 using EPiServer.Core;
 using EPiServer.Find.Api;
 using EPiServer.Find.Cms;
 using EPiServer.Find.UI;
 using EPiServer.Find.UI.Helpers;
+using EPiServer.Framework;
 using EPiServer.Shell.Services.Rest;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace EPiCode.InspectInIndex
 {
@@ -15,15 +17,15 @@ namespace EPiCode.InspectInIndex
         private readonly IContentLoader _contentLoader;
         private readonly IContentIndexer _contentIndexer;
         private readonly IPathHelper _pathHelper;
-        private readonly IFindUIConfiguration _findUiConfiguration;
+        private readonly IOptionsMonitor<FindUIOptions> _findUiOptions;
         private readonly LanguageRoutingFactory _languageRoutingFactory;
 
-        public InspectInIndexStore(IContentLoader contentLoader, IContentIndexer contentIndexer, IPathHelper pathHelper, IFindUIConfiguration findUiConfiguration, LanguageRoutingFactory languageRoutingFactory)
+        public InspectInIndexStore(IContentLoader contentLoader, IContentIndexer contentIndexer, IPathHelper pathHelper, IOptionsMonitor<FindUIOptions> findUiOptions, LanguageRoutingFactory languageRoutingFactory)
         {
             _contentLoader = contentLoader;
             _contentIndexer = contentIndexer;
             _pathHelper = pathHelper;
-            _findUiConfiguration = findUiConfiguration;
+            _findUiOptions = findUiOptions;
             _languageRoutingFactory = languageRoutingFactory;
         }
 
@@ -36,9 +38,14 @@ namespace EPiCode.InspectInIndex
         }
 
         [HttpPost]
-        public ActionResult Post(ContentReference reference)
+        public ActionResult Post([FromBody] IndexInputModel inputModel)
         {
-            var content = _contentLoader.Get<IContent>(reference);
+            Validator.ThrowIfNull("inputModel", inputModel);
+            Validator.ThrowIfNull("reference", inputModel.Reference);
+
+            var contentReference = ContentReference.Parse(inputModel.Reference);
+
+            var content = _contentLoader.Get<IContent>(contentReference);
             _contentIndexer.Index(content);
 
             var rest = Rest(new { path = GetIndexContentPath(content) });
@@ -50,12 +57,12 @@ namespace EPiCode.InspectInIndex
             var content = _contentLoader.Get<IContent>(id);
             _contentIndexer.Delete(content);
 
-            return null;
+            return Json("");
         }
 
         private string GetIndexContentPath(IContent content)
         {
-            string findProxyPath = _pathHelper.EnsureTrailingSlash(_pathHelper.GetPathInModule(_findUiConfiguration.AdminProxyPath));
+            string findProxyPath = _pathHelper.EnsureTrailingSlash(_pathHelper.GetPathInModule(_findUiOptions.CurrentValue.AdminProxyPath));
             return findProxyPath + GetTypeAndIndexId(content) + GetLanguageRoutingParameter(content);
         }
 
@@ -89,5 +96,10 @@ namespace EPiCode.InspectInIndex
 
             return _languageRoutingFactory.CreateLanguageRouting(locale);
         }
+    }
+
+    public class IndexInputModel
+    {
+        public string Reference { get; set; }
     }
 }

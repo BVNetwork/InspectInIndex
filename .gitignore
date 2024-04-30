@@ -2,3 +2,4 @@ packages/
 bin/
 obj/
 src/.vs/
+src/modules/
