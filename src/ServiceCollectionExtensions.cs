@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using EPiCode.InspectInIndex;
 using EPiServer.Shell.Modules;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace EPiCode.InspectInIndex
 {
     public static class ServiceCollectionExtensions
     {
@@ -19,7 +19,6 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddInspectInIndex(
             this IServiceCollection services, Action<AuthorizationPolicyBuilder> configurePolicy)
         {
-            
             services.Configure<ProtectedModuleOptions>(
                 pm =>
                 {
